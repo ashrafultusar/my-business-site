@@ -21,16 +21,17 @@ const slideData: SlideData[] = [
     category: "STREETWEAR",
     subtitle: "UNIQUE STYLE. LIMITLESS POSSIBILITIES.",
     title: "ELEVATE YOUR VIBE",
-    bgColor: "from-[#0d1b2a] via-[#1b263b] to-[#0d1b2a]",
+    // আপনার হিরো ব্যানারের সাথে রেলেভেন্ট মেজেন্টা/মেরুন টোন
+    bgColor: "from-[#7c0a43] via-[#a1125b] to-[#7c0a43]",
     accentColor: "#D11A6E",
-    imageMock: "🧬", 
+    imageMock: "🧬",
   },
   {
     id: "premium",
     category: "PREMIUM",
     subtitle: "NEXT GENERATION LUXURY LUXE.",
     title: "FUTURE FASHION NOW",
-    bgColor: "from-[#1a0933] via-[#2d124d] to-[#1a0933]",
+    bgColor: "from-[#4c052e] via-[#700b43] to-[#4c052e]",
     accentColor: "#a855f7",
     imageMock: "🔮",
   },
@@ -39,7 +40,7 @@ const slideData: SlideData[] = [
     category: "ACCESSORIES",
     subtitle: "CYBERPUNK TECHWEAR GEARS.",
     title: "UPGRADE YOUR LOOK",
-    bgColor: "from-[#062c2d] via-[#0b4f51] to-[#062c2d]",
+    bgColor: "from-[#5c0632] via-[#850c4b] to-[#5c0632]",
     accentColor: "#06b6d4",
     imageMock: "🕶️",
   },
@@ -71,7 +72,7 @@ export default function Slider() {
     setCurrentIndex(index);
   };
 
-  const slideVariants = {
+  const slideVariants: import("framer-motion").Variants = {
     enter: (dir: number) => ({
       x: dir > 0 ? "100%" : "-100%",
       opacity: 0,
@@ -91,16 +92,18 @@ export default function Slider() {
   const currentSlide = slideData[currentIndex];
 
   return (
-    <div className="w-full bg-[#0a0f1d] py-4 md:py-6 px-3 sm:px-4 md:px-8 select-none overflow-hidden relative">
-      
+    // আউটার ব্যাকগ্রাউন্ড এখন পিওর হোয়াইট (bg-white)
+    <div className="w-full bg-white py-4 md:py-6 px-3 sm:px-4 md:px-8 select-none overflow-hidden relative">
+
       {/* 📱 Responsively Sized Main Viewport Box */}
-      {/* মোবাইলে হাইট ২০০px, ট্যাবলেটে ৩০০px এবং পিসিতে ৪০০px করা হয়েছে */}
-      <div className={`relative max-w-7xl mx-auto h-[200px] sm:h-[300px] md:h-[400px] rounded-2xl sm:rounded-[2rem] overflow-hidden bg-gradient-to-r ${currentSlide.bgColor} border border-white/10 shadow-2xl flex items-center`}>
-        
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
-        
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-72 sm:h-72 rounded-full filter blur-[80px] sm:blur-[120px] opacity-30 transition-all duration-1000 pointer-events-none"
+      <div className={`relative max-w-7xl mx-auto h-[220px] sm:h-[300px] md:h-[400px] rounded sm:rounded-[2rem] overflow-hidden bg-gradient-to-r ${currentSlide.bgColor} border border-white/10 shadow-xl flex items-center`}>
+
+        {/* Subtle Cyber Grid Layer */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
+
+        {/* Glow Orb */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 sm:w-72 sm:h-72  filter blur-[80px] sm:blur-[120px] opacity-30 transition-all duration-1000 pointer-events-none"
           style={{ backgroundColor: currentSlide.accentColor }}
         />
 
@@ -117,47 +120,47 @@ export default function Slider() {
             >
               {/* Left Content Side */}
               <div className="col-span-7 sm:col-span-8 lg:col-span-7 flex flex-col justify-center">
-                <h1 className="text-xl sm:text-4xl md:text-6xl font-black tracking-tight text-white">
+                <h1 className="text-xl sm:text-4xl md:text-6xl font-black tracking-tight text-white drop-shadow-sm">
                   My Shop
                 </h1>
-                
-                <p className="text-[7px] sm:text-xs font-bold tracking-[0.15em] mt-1 sm:mt-3 text-white/60 uppercase line-clamp-1">
+
+                <p className="text-[7px] sm:text-xs font-bold tracking-[0.15em] mt-1 sm:mt-3 text-white/70 uppercase line-clamp-1">
                   {currentSlide.subtitle}
                 </p>
-                
-                <h2 className="text-xs sm:text-xl md:text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 line-clamp-1">
+
+                <h2 className="text-xs sm:text-xl md:text-3xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-gray-300 line-clamp-1">
                   {currentSlide.title}
                 </h2>
 
                 {/* Scaled Responsive Buttons */}
-                <div className="flex items-center gap-2 mt-2 sm:mt-6 md:mt-8">
-                  <Link 
+                <div className="flex items-center gap-2 mt-3 sm:mt-6 md:mt-8">
+                  <Link
                     href={`/shop/${currentSlide.id}`}
-                    className="flex items-center gap-1 sm:gap-2 bg-white text-black font-black text-[8px] sm:text-xs md:text-sm px-2.5 py-1.5 sm:px-5 sm:py-3 rounded-full hover:opacity-90 transition-all"
+                    className="flex items-center justify-center bg-white text-[#7c0a43] font-black text-[9px] sm:text-xs md:text-sm px-3 py-1.5 sm:px-5 sm:py-3 rounded-full hover:bg-opacity-90 transition-all shadow-sm"
                   >
                     DISCOVER
                   </Link>
-                  <Link 
+                  <Link
                     href={`/shop/${currentSlide.id}`}
-                    className="hidden sm:inline-block border border-white/30 backdrop-blur-md text-white font-bold text-[8px] sm:text-xs md:text-sm px-4 py-3 rounded-full hover:bg-white/10 transition-all"
+                    className="hidden sm:inline-block border border-white/30 backdrop-blur-md text-white font-bold text-xs md:text-sm px-5 py-3 rounded-full hover:bg-white/10 transition-all"
                   >
                     SHOP NOW
                   </Link>
                 </div>
               </div>
 
-              {/* Right Side Image Space: Visible on ALL Devices now */}
+              {/* Right Side Image Space: Mobile ও বড় ডিভাইসের জন্য অপ্টিমাইজড */}
               <div className="col-span-5 sm:col-span-4 lg:col-span-5 flex items-center justify-center relative">
-                <motion.div 
+                <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  className="w-16 h-16 sm:w-40 sm:h-40 md:w-64 md:h-64 rounded-xl sm:rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-2xl sm:text-6xl md:text-8xl shadow-xl relative"
+                  // মোবাইলে ইমেজ বক্সকে w-28 h-28 করা হয়েছে যাতে এটি স্পষ্ট ও প্রফেশনাল দেখায়
+                  className="w-24 h-24 sm:w-40 sm:h-40 md:w-64 md:h-64 rounded-xl sm:rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-4xl sm:text-6xl md:text-8xl shadow-2xl relative"
                 >
-                  {/* বাস্তব প্রোজেক্টে এই স্পেসটিতে আপনার <Image /> কম্পোনেন্ট বসাবেন */}
                   <span>{currentSlide.imageMock}</span>
-                  
-                  {/* Mini floating logo dot */}
-                  <div className="absolute -top-1.5 -right-1.5 sm:-top-3 sm:-right-3 w-5 h-5 sm:w-10 sm:h-10 bg-[#D11A6E] rounded-full flex items-center justify-center text-[8px] sm:text-xs font-bold text-white shadow-md">
+
+                  {/* Floating Logo Dot */}
+                  <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-10 sm:h-10 bg-[#D11A6E] rounded-full flex items-center justify-center text-[9px] sm:text-xs font-bold text-white shadow-md border border-white/20">
                     M
                   </div>
                 </motion.div>
@@ -166,22 +169,22 @@ export default function Slider() {
           </AnimatePresence>
         </div>
 
-        {/* Scaled Nav Arrows */}
-        <button 
+        {/* Navigation Arrows */}
+        <button
           onClick={handlePrev}
-          className="absolute left-2 sm:left-4 z-20 w-7 h-7 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 text-white transition-all focus:outline-none"
+          className="absolute left-2 sm:left-4 z-20 w-7 h-7 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 text-white transition-all focus:outline-none"
         >
           <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
-        <button 
+        <button
           onClick={handleNext}
-          className="absolute right-2 sm:right-4 z-20 w-7 h-7 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-black/30 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 text-white transition-all focus:outline-none"
+          className="absolute right-2 sm:right-4 z-20 w-7 h-7 sm:w-10 sm:h-10 rounded-full border border-white/10 bg-black/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/10 text-white transition-all focus:outline-none"
         >
           <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
         </button>
       </div>
 
-      {/* Responsive Bottom Capsule Tabs */}
+      {/* Relevant Bottom Capsule Tabs */}
       <div className="max-w-md mx-auto flex items-center justify-center gap-2 mt-4 sm:mt-6">
         {slideData.map((slide, idx) => {
           const isActive = idx === currentIndex;
@@ -189,11 +192,10 @@ export default function Slider() {
             <button
               key={slide.id}
               onClick={() => handleTabClick(idx)}
-              className={`flex-1 py-1.5 sm:py-3 px-2 rounded-full text-center text-[9px] sm:text-xs font-black tracking-wider transition-all duration-300 focus:outline-none uppercase ${
-                isActive 
-                  ? "bg-white text-black shadow-md ring-1 ring-[#D11A6E]" 
-                  : "bg-[#182235] text-white/50 border border-white/5"
-              }`}
+              className={`flex-1 py-2 sm:py-3 px-2 rounded-full text-center text-[9px] sm:text-xs font-black tracking-wider transition-all duration-300 focus:outline-none uppercase ${isActive
+                  ? "bg-[#7c0a43] text-white shadow-md ring-2 ring-[#D11A6E]/50"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200 border border-transparent"
+                }`}
             >
               {slide.category}
             </button>

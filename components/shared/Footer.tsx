@@ -57,9 +57,9 @@ export default function Footer() {
         <div className="lg:col-span-2 flex flex-col gap-4">
           <Link href="/" className="flex items-center gap-2 font-bold text-2xl tracking-wide text-white">
             <div className="border-2 border-white rounded-full w-7 h-7 flex items-center justify-center font-extrabold text-sm">
-              G
+              M
             </div>
-            <span>Govaly</span>
+            <span>My Shop</span>
           </Link>
           <p className="text-sm text-white/80 max-w-sm leading-relaxed">
             Your ultimate lifestyle and shopping destination. Empowering your everyday choices with quality products and seamless experience.
