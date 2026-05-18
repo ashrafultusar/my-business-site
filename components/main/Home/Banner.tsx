@@ -1,0 +1,78 @@
+'use client';
+
+import React, { useState } from 'react';
+
+export default function Banner() {
+  const [searchQuery, setSearchQuery] = useState<string>('');
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // আপনার সার্চ লজিক এখানে লিখুন
+    console.log('Searching for:', searchQuery);
+  };
+
+  return (
+    <div className="relative w-full h-[380px] md:h-[420px] bg-[#C11767] flex flex-col items-center justify-center overflow-hidden px-4">
+      
+      {/* City Silhouette Background Layer */}
+      <div 
+        className="absolute inset-0 opacity-15 bg-bottom bg-repeat-x pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400' width='1200' height='400'%3E%3Cpath d='M0,400 L0,280 L40,280 L40,250 L90,250 L90,310 L130,310 L130,180 L180,180 L180,220 L220,220 L220,150 L280,150 L280,290 L320,290 L320,210 L380,210 L380,110 L440,110 L440,260 L490,260 L490,190 L550,190 L550,320 L600,320 L600,130 L660,130 L660,240 L710,240 L710,170 L780,170 L780,280 L830,280 L830,140 L890,140 L890,220 L940,220 L940,100 L1000,100 L1000,270 L1060,270 L1060,195 L1120,195 L1120,310 L1200,310 L1200,400 Z' fill='%23000000'/%3E%3C/svg%3E")`,
+          backgroundSize: 'contain',
+        }}
+      />
+
+      {/* Content Container */}
+      <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center">
+        
+        {/* Subtitle */}
+        <h2 className="text-white text-xl sm:text-2xl md:text-4xl font-medium tracking-wide mb-2 drop-shadow-sm">
+          Bangladesh’s Favorite Online
+        </h2>
+        
+        {/* Main Title */}
+        <h1 className="text-white text-5xl sm:text-7xl md:text-8xl font-black tracking-tight mb-8 drop-shadow-md">
+          Fashion Mall
+        </h1>
+
+        {/* Search Bar Form */}
+        <form 
+          onSubmit={handleSearch}
+          className="w-full max-w-2xl bg-white rounded-full p-1.5 flex items-center shadow-lg transition-all focus-within:ring-4 focus-within:ring-pink-300"
+        >
+          {/* Search Icon */}
+          <div className="pl-4 pr-2 text-gray-400 flex items-center">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+
+          {/* Input Field */}
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+            className="w-full bg-transparent py-2 px-1 text-gray-800 text-base md:text-lg placeholder-gray-400 focus:outline-none"
+          />
+
+          {/* Search Button */}
+          <button
+            type="submit"
+            className="bg-[#C11767] text-white font-semibold text-sm md:text-base px-6 md:px-8 py-2 md:py-2.5 rounded-full hover:bg-[#A01053] active:scale-95 transition-all duration-150 shadow-sm"
+          >
+            Search
+          </button>
+        </form>
+
+      </div>
+    </div>
+  );
+}
