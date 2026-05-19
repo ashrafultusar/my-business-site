@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { Heart, ShoppingCart, Star, Eye } from "lucide-react";
 
@@ -16,6 +17,7 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({
+  id,
   title,
   price,
   oldPrice,
@@ -28,10 +30,11 @@ export default function ProductCard({
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden group relative flex flex-col justify-between transition-all duration-300 hover:shadow-[0_10px_30px_rgba(124,10,67,0.08)] hover:-translate-y-1 select-none w-full">
-      
+      <Link href={`/product/${id}`} className="absolute inset-0 z-10" aria-label={`View ${title}`} />
+
       {/* --- TOP: Image & Badges Container --- */}
       <div className="relative bg-[#FFF5F9] aspect-square w-full overflow-hidden flex items-center justify-center p-4 sm:p-6">
-        
+
         {/* Badges Left Side */}
         <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
           {isNew && (
@@ -48,13 +51,15 @@ export default function ProductCard({
 
         {/* Wishlist Button Right Side */}
         <button
-          onClick={() => setIsWishlist(!isWishlist)}
-          className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center border border-gray-100 text-gray-400 hover:text-[#D11A6E] transition-all duration-300 active:scale-90 focus:outline-none"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsWishlist(!isWishlist);
+          }}
+          className="absolute top-2 right-2 z-20 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm shadow-sm flex items-center justify-center border border-gray-100 text-gray-400 hover:text-[#D11A6E] transition-all duration-300 active:scale-90 focus:outline-none"
         >
-          <Heart 
-            className={`w-4 h-4 transition-all duration-300 ${
-              isWishlist ? "fill-[#D11A6E] text-[#D11A6E] scale-110" : ""
-            }`} 
+          <Heart
+            className={`w-4 h-4 transition-all duration-300 ${isWishlist ? "fill-[#D11A6E] text-[#D11A6E] scale-110" : ""
+              }`}
           />
         </button>
 
@@ -80,16 +85,15 @@ export default function ProductCard({
 
       {/* --- BOTTOM: Details Content Section --- */}
       <div className="p-3 sm:p-4 flex flex-col flex-grow gap-1.5 bg-white">
-        
+
         {/* Rating Section */}
         <div className="flex items-center gap-1">
           <div className="flex items-center text-amber-400">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${
-                  i < Math.floor(rating) ? "fill-amber-400" : "text-gray-200"
-                }`}
+                className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${i < Math.floor(rating) ? "fill-amber-400" : "text-gray-200"
+                  }`}
               />
             ))}
           </div>
@@ -117,8 +121,9 @@ export default function ProductCard({
           </div>
 
           {/* Add to Cart Premium Pill/Icon Button */}
-          <button 
-            className="group/btn relative overflow-hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-[#7c0a43] to-[#A1125B] text-white shadow-md shadow-[#7c0a43]/20 hover:shadow-lg hover:shadow-[#7c0a43]/30 transition-all duration-300 active:scale-95 focus:outline-none"
+          <button
+            onClick={(e) => e.preventDefault()}
+            className="relative z-20 group/btn overflow-hidden flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-[#7c0a43] to-[#A1125B] text-white shadow-md shadow-[#7c0a43]/20 hover:shadow-lg hover:shadow-[#7c0a43]/30 transition-all duration-300 active:scale-95 focus:outline-none"
             aria-label="Add to cart"
           >
             <ShoppingCart className="w-4 h-4 transition-transform group-hover/btn:-translate-y-10 duration-300 absolute" />
