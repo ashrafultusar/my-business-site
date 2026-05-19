@@ -4,10 +4,10 @@ import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Share2, ShieldCheck, Truck, RefreshCcw, ChevronRight, X, CheckCircle2, ShoppingCart, Star } from "lucide-react";
-import { DUMMY_PRODUCTS } from "@/lib/dummyData";
 import ProductCard from "@/components/main/card/ProductCard";
 import { placeOrder } from "@/actions/order";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 
 export default function ProductDetailsPage({
     product,
@@ -21,13 +21,11 @@ export default function ProductDetailsPage({
     const [isWishlist, setIsWishlist] = useState(false);
     const [selectedSize, setSelectedSize] = useState("M");
 
-    // Checkout State
-    const [showCheckout, setShowCheckout] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [orderInfo, setOrderInfo] = useState<{ orderId: string; total: number } | null>(null);
-    const [isPending, startTransition] = useTransition();
+
 
     const { addToCart } = useCart();
+    const router = useRouter();
+
 
     const discount = product.oldPrice
         ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
@@ -41,7 +39,7 @@ export default function ProductDetailsPage({
                 <nav className="flex items-center text-xs font-medium text-gray-500 mb-6">
                     <Link href="/" className="hover:text-[#7c0a43] transition-colors">Home</Link>
                     <ChevronRight className="w-3 h-3 mx-2" />
-                    <Link href={`/category/${product.category.toLowerCase()}`} className="hover:text-[#7c0a43] transition-colors uppercase">
+                    <Link href={`/products/${product.category.toLowerCase()}`} className="hover:text-[#7c0a43] transition-colors uppercase">
                         {product.category}
                     </Link>
                     <ChevronRight className="w-3 h-3 mx-2" />
@@ -97,7 +95,7 @@ export default function ProductDetailsPage({
                     <div className="w-full lg:w-1/2 flex flex-col">
 
                         <div className="flex items-center justify-between mb-2">
-                            <Link href={`/category/${product.category.toLowerCase()}`}>
+                            <Link href={`/products/${product.category.toLowerCase()}`}>
                                 <span className="text-[#7c0a43] font-bold text-xs tracking-widest uppercase bg-[#7c0a43]/10 px-3 py-1 rounded-full w-max hover:bg-[#7c0a43]/20 transition-colors cursor-pointer">
                                     {product.category}
                                 </span>
@@ -209,7 +207,17 @@ export default function ProductDetailsPage({
 
                             {/* Buy Now */}
                             <button
-                                onClick={() => setShowCheckout(true)}
+                                onClick={() => {
+                                    addToCart({
+                                        productId: product.id.toString(),
+                                        title: product.title,
+                                        price: product.price,
+                                        quantity: quantity,
+                                        size: selectedSize,
+                                        image: product.images ? product.images[0] : product.imageSrc
+                                    });
+                                    router.push('/checkout');
+                                }}
                                 className={`flex-1 rounded-2xl font-black text-lg py-4 px-6 flex items-center justify-center gap-3 shadow-xl transition-all duration-300 ${product.inStock !== false
                                     ? "bg-gray-900 text-white shadow-gray-900/25 hover:shadow-2xl hover:shadow-gray-900/40 hover:-translate-y-1"
                                     : "bg-gray-200 text-gray-500 cursor-not-allowed shadow-none"
@@ -308,91 +316,6 @@ export default function ProductDetailsPage({
                 )}
 
             </div>
-
-            {/* Checkout Modal */}
-            {showCheckout && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                    <div className="bg-white rounded-3xl w-full max-w-md overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
-                        <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                            <h2 className="text-xl font-black text-gray-900">Checkout</h2>
-                            <button onClick={() => setShowCheckout(false)} className="text-gray-400 hover:text-gray-900 transition-colors">
-                                <X className="w-6 h-6" />
-                            </button>
-                        </div>
-                        <form action={(formData) => {
-                            const items = [{
-                                productId: product.id.toString(),
-                                title: product.title,
-                                price: product.price,
-                                quantity: quantity,
-                                size: selectedSize,
-                                image: product.images ? product.images[0] : product.imageSrc
-                            }];
-                            formData.append("items", JSON.stringify(items));
-                            formData.append("totalAmount", (product.price * quantity).toString());
-
-                            startTransition(async () => {
-                                const result = await placeOrder(formData);
-                                if (result.success) {
-                                    setOrderInfo({ orderId: result.orderId as string, total: product.price * quantity });
-                                    setShowCheckout(false);
-                                    setShowSuccess(true);
-                                } else {
-                                    alert(result.message);
-                                }
-                            });
-                        }} className="p-6 space-y-4">
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Full Name</label>
-                                <input type="text" name="customerName" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#7c0a43] focus:ring-2 focus:ring-[#7c0a43]/20 transition-all outline-none" placeholder="e.g. John Doe" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Phone Number</label>
-                                <input type="tel" name="customerPhone" required className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#7c0a43] focus:ring-2 focus:ring-[#7c0a43]/20 transition-all outline-none" placeholder="e.g. 01XXXXXXXXX" />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-gray-700 mb-1">Delivery Address</label>
-                                <textarea name="address" required rows={3} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#7c0a43] focus:ring-2 focus:ring-[#7c0a43]/20 transition-all outline-none resize-none" placeholder="Full address details..."></textarea>
-                            </div>
-                            <div className="pt-4 flex items-center justify-between font-black text-lg border-t border-gray-100">
-                                <span>Total to Pay:</span>
-                                <span>৳{(product.price * quantity).toLocaleString()}</span>
-                            </div>
-                            <button type="submit" disabled={isPending} className="w-full mt-4 bg-gradient-to-r from-[#7c0a43] to-[#A1125B] text-white py-4 rounded-xl font-black text-lg disabled:opacity-70 disabled:cursor-not-allowed hover:shadow-xl hover:shadow-[#7c0a43]/30 transition-all">
-                                {isPending ? "PROCESSING..." : "CONFIRM ORDER"}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            )}
-
-            {/* Success Popup */}
-            {showSuccess && orderInfo && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                    <div className="bg-white rounded-3xl w-full max-w-sm p-8 text-center shadow-2xl flex flex-col items-center animate-in fade-in zoom-in duration-300">
-                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                            <CheckCircle2 className="w-10 h-10 text-green-600" />
-                        </div>
-                        <h2 className="text-2xl font-black text-gray-900 mb-2">Order Confirmed!</h2>
-                        <p className="text-gray-500 mb-6 font-medium">Thank you for your purchase.</p>
-
-                        <div className="bg-gray-50 w-full rounded-2xl p-4 mb-8 border border-gray-100">
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-gray-500 text-sm font-bold">Order ID</span>
-                                <span className="text-[#7c0a43] font-black">{orderInfo.orderId}</span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <span className="text-gray-500 text-sm font-bold">Total Amount</span>
-                                <span className="text-gray-900 font-black">৳{orderInfo.total.toLocaleString()}</span>
-                            </div>
-                        </div>
-
-                        <button onClick={() => setShowSuccess(false)} className="w-full bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition-colors">
-                            Continue Shopping
-                        </button>
-                    </div>
-                </div>
-            )}
         </main>
     );
 }

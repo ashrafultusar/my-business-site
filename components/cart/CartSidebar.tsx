@@ -121,10 +121,12 @@ export default function CartSidebar() {
                                     <span>Subtotal</span>
                                     <span>৳{cartTotal.toLocaleString()}</span>
                                 </div>
-                                <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#7c0a43] to-[#A1125B] text-white py-4 rounded-xl font-black text-lg hover:shadow-xl hover:shadow-[#7c0a43]/30 hover:-translate-y-0.5 transition-all">
-                                    <CreditCard className="w-5 h-5" />
-                                    Proceed to Checkout
-                                </button>
+                                <Link href="/checkout" className="w-full" onClick={closeSidebar}>
+                                    <button className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#7c0a43] to-[#A1125B] text-white py-4 rounded-xl font-black text-lg hover:shadow-xl hover:shadow-[#7c0a43]/30 hover:-translate-y-0.5 transition-all">
+                                        <CreditCard className="w-5 h-5" />
+                                        Proceed to Checkout
+                                    </button>
+                                </Link>
                                 <p className="text-xs text-center text-gray-400 mt-4">
                                     Shipping, taxes, and discount codes calculated at checkout.
                                 </p>

@@ -22,6 +22,7 @@ interface CartContextType {
     closeSidebar: () => void;
     cartTotal: number;
     cartCount: number;
+    clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -79,6 +80,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
     const closeSidebar = () => setIsSidebarOpen(false);
+    const clearCart = () => setItems([]);
 
     const cartTotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
     const cartCount = items.reduce((count, item) => count + item.quantity, 0);
@@ -95,6 +97,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
                 closeSidebar,
                 cartTotal,
                 cartCount,
+                clearCart,
             }}
         >
             {children}

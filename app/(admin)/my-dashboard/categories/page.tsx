@@ -9,22 +9,22 @@ export default async function CategoriesPage() {
     const categories = await Category.find().sort({ createdAt: -1 });
 
     return (
-        <div className="p-6 bg-white dark:bg-zinc-900 rounded-lg shadow-md mt-6">
+        <div className="p-6 bg-white border border-pink-100 rounded-2xl shadow-xl shadow-pink-900/5 mt-6">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                <h1 className="text-2xl font-bold text-pink-950">
                     Categories
                 </h1>
                 <Link
                     href="/my-dashboard/categories/add-category"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                    className="px-4 py-2 bg-pink-600 text-white rounded-xl hover:bg-pink-700 shadow-lg shadow-pink-600/20 transition-all font-medium"
                 >
                     Add Category
                 </Link>
             </div>
 
             <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-800 dark:text-gray-300">
+                <table className="w-full text-sm text-left text-slate-600">
+                    <thead className="text-xs text-pink-900/80 uppercase bg-pink-50/50">
                         <tr>
                             <th className="px-4 py-3">Image</th>
                             <th className="px-4 py-3">Title</th>
@@ -36,7 +36,7 @@ export default async function CategoriesPage() {
                         {categories.map((category) => (
                             <tr
                                 key={category._id.toString()}
-                                className="border-b dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                                className="border-b border-pink-50 hover:bg-pink-50/30 transition-colors"
                             >
                                 <td className="px-4 py-3">
                                     <div className="w-12 h-12 relative rounded overflow-hidden">
@@ -49,7 +49,7 @@ export default async function CategoriesPage() {
                                         />
                                     </div>
                                 </td>
-                                <td className="px-4 py-3 font-medium text-gray-900 dark:text-white">
+                                <td className="px-4 py-3 font-medium text-slate-900">
                                     {category.title}
                                 </td>
                                 <td className="px-4 py-3">
@@ -59,7 +59,7 @@ export default async function CategoriesPage() {
                                     <div className="flex justify-end items-center space-x-2">
                                         <Link
                                             href={`/my-dashboard/categories/edit-category/${category._id.toString()}`}
-                                            className="inline-block px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition"
+                                            className="inline-block px-3 py-1 bg-amber-500/10 text-amber-600 rounded-lg hover:bg-amber-500/20 font-medium transition"
                                         >
                                             Edit
                                         </Link>
@@ -69,7 +69,7 @@ export default async function CategoriesPage() {
                                         }}>
                                             <button
                                                 type="submit"
-                                                className="inline-block px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                                                className="inline-block px-3 py-1 bg-rose-500/10 text-rose-600 rounded-lg hover:bg-rose-500/20 font-medium transition"
                                             >
                                                 Delete
                                             </button>

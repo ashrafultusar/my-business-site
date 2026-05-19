@@ -36,8 +36,8 @@ export default function DashboardSidebarClient({
     { name: "Order", href: "/my-dashboard/orders", icon: LayoutDashboard },
     { name: "Products", href: "/my-dashboard/products", icon: LayoutDashboard },
     { name: "Categorie", href: "/my-dashboard/categories", icon: LayoutDashboard },
-    
-    { name: "Profile", href: "/my-dashboard/profile", icon: User },
+
+    { name: "Administation", href: "/my-dashboard/users", icon: User },
   ];
 
   const toggleSidebar = () => setIsOpen(!isOpen);
@@ -45,16 +45,16 @@ export default function DashboardSidebarClient({
   return (
     <>
       {/* --- Mobile Header Bar --- */}
-      <div className="md:hidden w-full bg-slate-900/90 backdrop-blur-md border-b border-white/5 p-4 flex items-center justify-between sticky top-0 z-40">
+      <div className="md:hidden w-full bg-pink-700 backdrop-blur-md border-b border-pink-800 p-4 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <span className="text-xs">⚡</span>
+          <div className="w-8 h-8 bg-white text-pink-700 rounded-lg flex items-center justify-center shadow-lg">
+            <span className="text-xs font-bold">⚡</span>
           </div>
           <span className="text-white font-bold text-base">Dashboard</span>
         </div>
         <button
           onClick={toggleSidebar}
-          className="p-2 text-slate-400 hover:text-white bg-white/5 rounded-xl transition"
+          className="p-2 text-pink-100 hover:text-white bg-white/10 rounded-xl transition"
         >
           {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -71,7 +71,7 @@ export default function DashboardSidebarClient({
       {/* --- Main Sidebar --- */}
       <aside
         className={`
-          fixed md:sticky top-0 left-0 z-50 h-screen bg-slate-900 border-r border-white/5 flex flex-col transition-all duration-300 ease-in-out
+          fixed md:sticky top-0 left-0 z-50 h-screen bg-pink-700 border-r border-pink-800 flex flex-col transition-all duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
           ${isCollapsed ? "md:w-20" : "w-64"}
         `}
@@ -79,7 +79,7 @@ export default function DashboardSidebarClient({
         {/* Collapse Button (Only Desktop) */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="hidden md:flex absolute -right-3 top-7 w-6 h-6 bg-slate-800 border border-white/10 rounded-full items-center justify-center text-slate-400 hover:text-white hover:bg-indigo-600 transition group"
+          className="hidden md:flex absolute -right-3 top-7 w-6 h-6 bg-pink-800 border border-pink-900 rounded-full items-center justify-center text-pink-100 hover:text-white hover:bg-pink-900 transition group"
         >
           {isCollapsed ? (
             <ChevronRight className="w-3 h-3" />
@@ -89,12 +89,12 @@ export default function DashboardSidebarClient({
         </button>
 
         {/* Logo Section */}
-        <div className="p-6 border-b border-white/5 flex items-center gap-3">
-          <div className="w-9 h-9 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-indigo-500/20">
-            <span className="text-sm">⚡</span>
+        <div className="p-6 border-b border-pink-800 flex items-center gap-3">
+          <div className="w-9 h-9 bg-white text-pink-700 rounded-xl flex items-center justify-center shrink-0 shadow-lg">
+            <span className="text-sm font-black">⚡</span>
           </div>
           {!isCollapsed && (
-            <span className="text-white font-black tracking-wide text-lg bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+            <span className="text-white font-black tracking-wide text-lg bg-clip-text text-transparent bg-gradient-to-r from-white to-pink-200">
               CORE PANEL
             </span>
           )}
@@ -112,29 +112,27 @@ export default function DashboardSidebarClient({
                 onClick={() => setIsOpen(false)}
                 className={`
                   flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200 group relative
-                  ${
-                    isActive
-                      ? "bg-gradient-to-r from-indigo-600/20 to-purple-600/5 text-indigo-400 font-semibold border border-indigo-500/20"
-                      : "text-slate-400 hover:text-white hover:bg-white/5"
+                  ${isActive
+                    ? "bg-white text-pink-700 font-bold shadow-md"
+                    : "text-pink-100 hover:text-white hover:bg-white/10"
                   }
                 `}
               >
                 {/* Active Indicator Glow */}
                 {isActive && (
-                  <div className="absolute left-0 top-1/4 h-1/2 w-1 bg-indigo-500 rounded-r-full shadow-[0_0_10px_#6366f1]" />
+                  <div className="absolute left-0 top-1/4 h-1/2 w-1 bg-pink-400 rounded-r-full shadow-sm" />
                 )}
                 <Icon
-                  className={`w-5 h-5 shrink-0 ${
-                    isActive
-                      ? "text-indigo-400"
-                      : "text-slate-400 group-hover:text-white transition-colors"
-                  }`}
+                  className={`w-5 h-5 shrink-0 ${isActive
+                      ? "text-pink-700"
+                      : "text-pink-200 group-hover:text-white transition-colors"
+                    }`}
                 />
                 {!isCollapsed && <span className="text-sm">{link.name}</span>}
 
                 {/* Tooltip when collapsed */}
                 {isCollapsed && (
-                  <div className="absolute left-24 bg-slate-950 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 border border-white/5 shadow-xl">
+                  <div className="absolute left-24 bg-pink-900 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 border border-pink-800 shadow-xl">
                     {link.name}
                   </div>
                 )}
@@ -144,17 +142,17 @@ export default function DashboardSidebarClient({
         </nav>
 
         {/* User Profile & Logout */}
-        <div className="p-4 border-t border-white/5 bg-slate-950/40 backdrop-blur-md">
+        <div className="p-4 border-t border-pink-800 bg-pink-800/40 backdrop-blur-md">
           {user && !isCollapsed && (
-            <div className="mb-4 p-3 bg-white/5 border border-white/5 rounded-2xl relative overflow-hidden group">
-              <div className="absolute -right-6 -bottom-6 w-16 h-16 bg-indigo-500/10 rounded-full blur-xl group-hover:bg-indigo-500/20 transition-all duration-300" />
+            <div className="mb-4 p-3 bg-white/10 border border-white/10 rounded-2xl relative overflow-hidden group">
+              <div className="absolute -right-6 -bottom-6 w-16 h-16 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all duration-300" />
               <p className="text-white text-sm font-semibold truncate">
                 {user.name}
               </p>
-              <p className="text-slate-500 text-xs truncate mb-2">
+              <p className="text-pink-200 text-xs truncate mb-2">
                 {user.email}
               </p>
-              <div className="flex items-center gap-1.5 bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 px-2.5 py-1 rounded-full w-fit">
+              <div className="flex items-center gap-1.5 bg-white/20 border border-white/30 text-white px-2.5 py-1 rounded-full w-fit">
                 <ShieldAlert className="w-3 h-3" />
                 <span className="text-[10px] font-bold uppercase tracking-wider">
                   {user.role}
@@ -167,14 +165,14 @@ export default function DashboardSidebarClient({
             <button
               type="submit"
               className={`
-                w-full flex items-center justify-center md:justify-start gap-3 px-3 py-3 rounded-xl text-red-400 hover:text-red-300 hover:bg-red-500/10 transition duration-200 text-sm font-medium group relative
+                w-full flex items-center justify-center md:justify-start gap-3 px-3 py-3 rounded-xl text-pink-100 hover:text-white hover:bg-white/10 transition duration-200 text-sm font-medium group relative
               `}
             >
-              <LogOut className="w-5 h-5 shrink-0 text-red-400/80 group-hover:text-red-400 transition-colors" />
+              <LogOut className="w-5 h-5 shrink-0 text-pink-200 group-hover:text-white transition-colors" />
               {!isCollapsed && <span>Sign Out</span>}
 
               {isCollapsed && (
-                <div className="absolute left-24 bg-red-950 text-red-400 text-xs px-2.5 py-1.5 rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 border border-red-500/10 shadow-xl">
+                <div className="absolute left-24 bg-pink-900 text-white text-xs px-2.5 py-1.5 rounded-md opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity whitespace-nowrap z-50 border border-pink-800 shadow-xl">
                   Sign Out
                 </div>
               )}

@@ -5,12 +5,12 @@ import React from "react";
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col md:flex-row overflow-hidden">
+    <div className="min-h-screen bg-pink-50 flex flex-col md:flex-row overflow-hidden">
       {/* রেসপনসিভ ও ইউনিক সাইডবার */}
       <DashboardSidebar />
 
       {/* মেইন কন্টেন্ট এরিয়া */}
-      <main className="flex-1 h-[calc(100vh-69px)] md:h-screen overflow-y-auto p-4 md:p-8 text-white">
+      <main className="flex-1 h-[calc(100vh-69px)] md:h-screen overflow-y-auto p-4 md:p-8 text-slate-900">
         {children}
       </main>
     </div>

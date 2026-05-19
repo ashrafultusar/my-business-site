@@ -8,16 +8,16 @@ export default async function OrdersPage() {
     const orders = await Order.find().sort({ createdAt: -1 });
 
     return (
-        <div className="p-6 bg-white dark:bg-zinc-900 rounded-lg shadow-md mt-6">
+        <div className="p-6 bg-white border border-pink-100 rounded-2xl shadow-xl shadow-pink-900/5 mt-6">
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                <h1 className="text-2xl font-bold text-pink-950">
                     Order Management
                 </h1>
             </div>
 
             <div className="overflow-x-auto">
-                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-zinc-800 dark:text-gray-300">
+                <table className="w-full text-sm text-left text-slate-600">
+                    <thead className="text-xs text-pink-900/80 uppercase bg-pink-50/50">
                         <tr>
                             <th className="px-4 py-3">Order ID</th>
                             <th className="px-4 py-3">Customer</th>
@@ -31,21 +31,21 @@ export default async function OrdersPage() {
                         {orders.map((order) => (
                             <tr
                                 key={order._id.toString()}
-                                className="border-b dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800"
+                                className="border-b border-pink-50 hover:bg-pink-50/30 transition-colors"
                             >
-                                <td className="px-4 py-3 font-semibold text-gray-900 dark:text-white">
+                                <td className="px-4 py-3 font-semibold text-slate-900">
                                     #{order.orderId}
                                 </td>
                                 <td className="px-4 py-3">
                                     <div>
-                                        <div className="font-semibold text-gray-900 dark:text-white">{order.customerName}</div>
-                                        <div className="text-xs text-gray-500">{order.customerPhone}</div>
+                                        <div className="font-semibold text-slate-900">{order.customerName}</div>
+                                        <div className="text-xs text-pink-900/60">{order.customerPhone}</div>
                                     </div>
                                 </td>
                                 <td className="px-4 py-3">
                                     {new Date(order.createdAt).toLocaleDateString()}
                                 </td>
-                                <td className="px-4 py-3 font-bold text-[#7c0a43]">
+                                <td className="px-4 py-3 font-bold text-pink-700">
                                     ৳{order.totalAmount.toLocaleString()}
                                 </td>
                                 <td className="px-4 py-3">
@@ -61,7 +61,7 @@ export default async function OrdersPage() {
                                 <td className="px-4 py-3 text-right">
                                     <Link
                                         href={`/my-dashboard/orders/${order._id.toString()}`}
-                                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-200 dark:hover:bg-zinc-700 transition"
+                                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-pink-50 text-pink-700 rounded-lg hover:bg-pink-100 hover:text-pink-800 transition"
                                     >
                                         <Eye className="w-4 h-4" /> View
                                     </Link>

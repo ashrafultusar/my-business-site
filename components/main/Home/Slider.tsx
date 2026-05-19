@@ -92,12 +92,10 @@ export default function Slider() {
   const currentSlide = slideData[currentIndex];
 
   return (
-    // আউটার ব্যাকগ্রাউন্ড এখন পিওর হোয়াইট (bg-white)
     <div className="w-full bg-white py-4 md:py-6 px-3 sm:px-4 md:px-8 select-none overflow-hidden relative">
-
-      {/* 📱 Responsively Sized Main Viewport Box */}
-      <div className={`relative max-w-7xl mx-auto h-[220px] sm:h-[300px] md:h-[400px] rounded sm:rounded-[2rem] overflow-hidden bg-gradient-to-r ${currentSlide.bgColor} border border-white/10 shadow-xl flex items-center`}>
-
+      <div
+        className={`relative max-w-7xl mx-auto h-[220px] sm:h-[300px] md:h-[400px] rounded  overflow-hidden bg-gradient-to-r ${currentSlide.bgColor} border border-white/10 shadow-xl flex items-center`}
+      >
         {/* Subtle Cyber Grid Layer */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
 
@@ -118,7 +116,6 @@ export default function Slider() {
               exit="exit"
               className="w-full grid grid-cols-12 gap-2 sm:gap-6 items-center z-10"
             >
-              {/* Left Content Side */}
               <div className="col-span-7 sm:col-span-8 lg:col-span-7 flex flex-col justify-center">
                 <h1 className="text-xl sm:text-4xl md:text-6xl font-black tracking-tight text-white drop-shadow-sm">
                   My Shop
@@ -149,17 +146,14 @@ export default function Slider() {
                 </div>
               </div>
 
-              {/* Right Side Image Space: Mobile ও বড় ডিভাইসের জন্য অপ্টিমাইজড */}
               <div className="col-span-5 sm:col-span-4 lg:col-span-5 flex items-center justify-center relative">
                 <motion.div
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  // মোবাইলে ইমেজ বক্সকে w-28 h-28 করা হয়েছে যাতে এটি স্পষ্ট ও প্রফেশনাল দেখায়
                   className="w-24 h-24 sm:w-40 sm:h-40 md:w-64 md:h-64 rounded-xl sm:rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center text-4xl sm:text-6xl md:text-8xl shadow-2xl relative"
                 >
                   <span>{currentSlide.imageMock}</span>
 
-                  {/* Floating Logo Dot */}
                   <div className="absolute -top-1 -right-1 sm:-top-2 sm:-right-2 w-6 h-6 sm:w-10 sm:h-10 bg-[#D11A6E] rounded-full flex items-center justify-center text-[9px] sm:text-xs font-bold text-white shadow-md border border-white/20">
                     M
                   </div>
@@ -192,17 +186,17 @@ export default function Slider() {
             <button
               key={slide.id}
               onClick={() => handleTabClick(idx)}
-              className={`flex-1 py-2 sm:py-3 px-2 rounded-full text-center text-[9px] sm:text-xs font-black tracking-wider transition-all duration-300 focus:outline-none uppercase ${isActive
+              className={`flex-1 py-2 sm:py-3 px-2 rounded-full text-center text-[9px] sm:text-xs font-black tracking-wider transition-all duration-300 focus:outline-none uppercase ${
+                isActive
                   ? "bg-[#7c0a43] text-white shadow-md ring-2 ring-[#D11A6E]/50"
                   : "bg-gray-100 text-gray-500 hover:bg-gray-200 border border-transparent"
-                }`}
+              }`}
             >
               {slide.category}
             </button>
           );
         })}
       </div>
-
     </div>
   );
 }

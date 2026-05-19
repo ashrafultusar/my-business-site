@@ -11,7 +11,7 @@ export default async function CategorySection() {
     id: c._id?.toString(),
     title: c.title,
     imageSrc: c.image || "/placeholder-image.jpg",
-    href: `/category/${c.title.toLowerCase().replace(/\s+/g, '-')}`
+    href: `/products/${c.title.toLowerCase().replace(/\s+/g, '-')}`
   }));
   // Row 1 (শুরুতে "/" যোগ করা হয়েছে)
   const firstHalf = categories.slice(0, Math.ceil(categories.length / 2));

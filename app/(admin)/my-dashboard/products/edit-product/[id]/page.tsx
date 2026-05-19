@@ -9,7 +9,7 @@ interface Props {
 
 export default async function EditProductPage({ params }: Props) {
     const { id } = await params;
-    
+
     // ডাটাবেজ থেকে প্রোডাক্টের বর্তমান ডেটা নিয়ে আসা
     const product = await getProductById(id);
 
@@ -19,11 +19,11 @@ export default async function EditProductPage({ params }: Props) {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white dark:bg-zinc-900 rounded-lg shadow-md mt-6">
-            <h1 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">
+        <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-white border border-pink-100 rounded-2xl shadow-xl shadow-pink-900/5 mt-6">
+            <h1 className="text-2xl font-bold mb-6 text-pink-950">
                 Edit Product
             </h1>
-            
+
             {/* আলাদা করা এডিট ফর্ম কম্পোনেন্ট */}
             <EditProductForm initialData={product} />
         </div>

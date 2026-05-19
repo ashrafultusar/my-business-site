@@ -22,11 +22,11 @@ export default async function OrderDetailsPage({
       <div className="flex items-center gap-4 mb-2">
         <Link
           href="/my-dashboard/orders"
-          className="p-2 bg-white dark:bg-zinc-800 rounded-full shadow-sm hover:bg-gray-50 dark:hover:bg-zinc-700 transition"
+          className="p-2 bg-white bg-pink-50 rounded-full shadow-sm hover:bg-pink-50 dark:hover:bg-zinc-700 transition"
         >
-          <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+          <ArrowLeft className="w-5 h-5 text-pink-900/70 dark:text-gray-300" />
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+        <h1 className="text-2xl font-bold text-pink-950 text-pink-950">
           Order Details
         </h1>
       </div>
@@ -35,17 +35,17 @@ export default async function OrderDetailsPage({
         {/* Left Col: Order Items & Customer Info */}
         <div className="lg:col-span-2 space-y-6">
           {/* Items */}
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white  rounded-2xl p-6 shadow-sm border border-pink-100 ">
+            <h2 className="text-lg font-bold text-pink-950 text-pink-950 mb-4">
               Items Ordered
             </h2>
             <div className="space-y-4">
               {order?.items?.map((item: any, index: number) => (
                 <div
                   key={item._id?.toString() || `${item.title}-${item.size}-${index}`}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-gray-100 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-800/50"
+                  className="flex items-center gap-4 p-4 rounded-xl border border-pink-100  bg-pink-50 bg-pink-50/50"
                 >
-                  <div className="w-16 h-16 relative bg-white rounded-lg overflow-hidden shrink-0 border border-gray-100">
+                  <div className="w-16 h-16 relative bg-white rounded-lg overflow-hidden shrink-0 border border-pink-100">
                     <Image
                       src={item.image || "/placeholder-image.jpg"}
                       alt={item.title}
@@ -54,22 +54,22 @@ export default async function OrderDetailsPage({
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 dark:text-white truncate">
+                    <h3 className="font-semibold text-pink-950 text-pink-950 truncate">
                       {item.title}
                     </h3>
                     <div className="text-sm text-gray-500 mt-1">
                       Size:{" "}
-                      <span className="font-medium text-gray-700 dark:text-gray-300 uppercase">
+                      <span className="font-medium text-pink-900/80 dark:text-gray-300 uppercase">
                         {item.size}
                       </span>{" "}
                       &bull; Qty:{" "}
-                      <span className="font-medium text-gray-700 dark:text-gray-300">
+                      <span className="font-medium text-pink-900/80 dark:text-gray-300">
                         {item.quantity}
                       </span>
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-gray-900 dark:text-white">
+                    <div className="font-bold text-pink-950 text-pink-950">
                       ৳{(item.price * item.quantity).toLocaleString()}
                     </div>
                     <div className="text-xs text-gray-500">
@@ -82,8 +82,8 @@ export default async function OrderDetailsPage({
           </div>
 
           {/* Customer info */}
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white  rounded-2xl p-6 shadow-sm border border-pink-100 ">
+            <h2 className="text-lg font-bold text-pink-950 text-pink-950 mb-4">
               Customer Details
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -91,7 +91,7 @@ export default async function OrderDetailsPage({
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">
                   Full Name
                 </label>
-                <div className="font-medium text-gray-800 dark:text-gray-200">
+                <div className="font-medium text-pink-950 dark:text-gray-200">
                   {order.customerName}
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default async function OrderDetailsPage({
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">
                   Phone
                 </label>
-                <div className="font-medium text-gray-800 dark:text-gray-200">
+                <div className="font-medium text-pink-950 dark:text-gray-200">
                   {order.customerPhone}
                 </div>
               </div>
@@ -107,7 +107,7 @@ export default async function OrderDetailsPage({
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 block">
                   Delivery Address
                 </label>
-                <div className="font-medium text-gray-800 dark:text-gray-200 bg-gray-50 dark:bg-zinc-800 p-3 rounded-lg border border-gray-100 dark:border-zinc-700">
+                <div className="font-medium text-pink-950 dark:text-gray-200 bg-pink-50 bg-pink-50 p-3 rounded-lg border border-pink-100 dark:border-zinc-700">
                   {order.address}
                 </div>
               </div>
@@ -118,8 +118,8 @@ export default async function OrderDetailsPage({
         {/* Right Col: Summary & Status */}
         <div className="space-y-6">
           {/* Status updater */}
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white  rounded-2xl p-6 shadow-sm border border-pink-100 ">
+            <h2 className="text-lg font-bold text-pink-950 text-pink-950 mb-4">
               Order Status
             </h2>
             <StatusUpdater
@@ -129,8 +129,8 @@ export default async function OrderDetailsPage({
           </div>
 
           {/* Summary */}
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-zinc-800">
-            <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">
+          <div className="bg-white  rounded-2xl p-6 shadow-sm border border-pink-100 ">
+            <h2 className="text-lg font-bold text-pink-950 text-pink-950 mb-4">
               Order Summary
             </h2>
             <div className="space-y-3">
@@ -143,18 +143,18 @@ export default async function OrderDetailsPage({
                   )}{" "}
                   items)
                 </span>
-                <span className="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-pink-950 text-pink-950">
                   ৳{order.totalAmount.toLocaleString()}
                 </span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Shipping Mode</span>
-                <span className="font-medium text-gray-900 dark:text-white capitalize">
+                <span className="font-medium text-pink-950 text-pink-950 capitalize">
                   {order.paymentMethod.replace(/_/g, " ")}
                 </span>
               </div>
-              <div className="pt-3 border-t border-gray-100 dark:border-zinc-800 flex justify-between items-center">
-                <span className="font-bold text-gray-900 dark:text-white">
+              <div className="pt-3 border-t border-pink-100  flex justify-between items-center">
+                <span className="font-bold text-pink-950 text-pink-950">
                   Total
                 </span>
                 <span className="text-xl font-black text-[#7c0a43]">
@@ -165,16 +165,16 @@ export default async function OrderDetailsPage({
           </div>
 
           {/* Order Meta */}
-          <div className="bg-gray-50 dark:bg-zinc-900/50 rounded-2xl p-4 border border-gray-100 dark:border-zinc-800">
+          <div className="bg-pink-50 /50 rounded-2xl p-4 border border-pink-100 ">
             <div className="flex justify-between text-xs mb-2">
               <span className="text-gray-500 font-medium">Order ID</span>
-              <span className="font-mono font-bold text-gray-700 dark:text-gray-300">
+              <span className="font-mono font-bold text-pink-900/80 dark:text-gray-300">
                 #{order.orderId}
               </span>
             </div>
             <div className="flex justify-between text-xs">
               <span className="text-gray-500 font-medium">Placed On</span>
-              <span className="font-medium text-gray-700 dark:text-gray-300">
+              <span className="font-medium text-pink-900/80 dark:text-gray-300">
                 {new Date(order.createdAt).toLocaleString()}
               </span>
             </div>

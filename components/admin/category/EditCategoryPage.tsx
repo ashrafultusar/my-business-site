@@ -78,7 +78,7 @@ export default function EditCategoryPage({ initialData }: { initialData: Categor
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-pink-900/80 dark:text-gray-300">
                         Title <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -86,37 +86,37 @@ export default function EditCategoryPage({ initialData }: { initialData: Categor
                         required
                         type="text"
                         name="title"
-                        className="mt-1 w-full p-2 border rounded-md dark:bg-zinc-800 dark:border-zinc-700 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="mt-1 w-full p-2 border rounded-md bg-pink-50 dark:border-zinc-700 text-pink-950 focus:ring-2 focus:ring-pink-500 outline-none"
                     />
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <label className="block text-sm font-medium text-pink-900/80 dark:text-gray-300">
                         Description <span className="text-gray-400 font-normal">(Optional)</span>
                     </label>
                     <textarea
                         defaultValue={initialData.description}
                         name="description"
                         rows={4}
-                        className="mt-1 w-full p-2 border rounded-md dark:bg-zinc-800 dark:border-zinc-700 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="mt-1 w-full p-2 border rounded-md bg-pink-50 dark:border-zinc-700 text-pink-950 focus:ring-2 focus:ring-pink-500 outline-none"
                     ></textarea>
                 </div>
             </div>
 
-            <div className="pt-4 border-t border-gray-200 dark:border-zinc-700">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <div className="pt-4 border-t border-pink-200 dark:border-zinc-700">
+                <label className="block text-sm font-medium text-pink-900/80 dark:text-gray-300 mb-2">
                     Category Image <span className="text-gray-400 font-normal">(Optional)</span>
                 </label>
                 <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-zinc-700 dark:file:text-zinc-300 mb-4 cursor-pointer"
+                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-pink-50 file:text-pink-700 hover:file:bg-pink-100 dark:file:bg-zinc-700 dark:file:text-zinc-300 mb-4 cursor-pointer"
                 />
 
                 <div className="flex flex-wrap gap-4 mt-4">
                     {existingImage && (
-                        <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden border border-gray-200 dark:border-zinc-700 shadow-sm group">
+                        <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden border border-pink-200 dark:border-zinc-700 shadow-sm group">
                             <Image src={existingImage} alt="Existing" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
                             <button
                                 type="button"
@@ -129,9 +129,9 @@ export default function EditCategoryPage({ initialData }: { initialData: Categor
                     )}
 
                     {newPreview && (
-                        <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden border border-blue-400 shadow-sm group">
+                        <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-md overflow-hidden border border-pink-400 shadow-sm group">
                             <Image src={newPreview} alt="New Preview" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
-                            <div className="absolute top-1 left-1 bg-blue-600 text-xs px-1 text-white rounded opacity-80">New</div>
+                            <div className="absolute top-1 left-1 bg-pink-600 text-xs px-1 text-white rounded opacity-80">New</div>
                             <button
                                 type="button"
                                 onClick={removeNewImage}
@@ -148,7 +148,7 @@ export default function EditCategoryPage({ initialData }: { initialData: Categor
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full xl:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full xl:w-auto px-6 py-3 bg-pink-600 hover:bg-pink-700 text-white font-medium rounded-md shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {loading ? "Updating Category..." : "Update Category"}
                 </button>
